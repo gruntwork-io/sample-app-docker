@@ -8,7 +8,7 @@ This Docker container contains a simple _"Hello World!"_ [Node.js][node_js] app.
 
 ## Running the app in local development
 
-The provided Docker Compose file allows you to run the app locally in development. To start the containers, run:
+The provided Docker Compose file allows you to run the app locally in development. To start the container, run:
 
 ```
 $ docker-compose up
