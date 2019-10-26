@@ -12,7 +12,31 @@ steps:
 
   # build an artifact using the docker builder
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "--build-arg", "NODE_ENV=production", "-t", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA", "."]
+    args:
+      [
+        "build",
+        "--build-arg",
+        "NODE_ENV=production",
+        "-t",
+        "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA",
+        ".",
+      ]
+
+  # push the artifact to a GCR repository
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"]
+
+  # deploy the app to a GKE cluster
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --image=gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA
+      - --location=${_GKE_CLUSTER_LOCATION}
+      - --cluster=${_GKE_CLUSTER_NAME}
+
+substitutions:
+  _GKE_CLUSTER_LOCATION: europe-west3 # must be substituted
+  _GKE_CLUSTER_NAME: private-cluster # must be substituted
 
 # push the resulting images to Google Container Registry.
 images:
