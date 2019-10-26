@@ -1,5 +1,17 @@
+# Example Cloud Build Configuration File
+#
+# define the build steps
 steps:
+  # install the app dependencies
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["install"]
+
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "test:unit"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA", "."]
+
+# push the resulting images to Google Container Registry.
 images:
   - "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"
