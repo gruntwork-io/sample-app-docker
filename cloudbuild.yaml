@@ -13,6 +13,8 @@ steps:
   # build an artifact using the docker builder
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA", "."]
+    env:
+      - "NODE_ENV=production"
 
 # push the resulting images to Google Container Registry.
 images:
