@@ -11,3 +11,6 @@
 build/
 */build/
 out/
+
+# npm
+node_modules
