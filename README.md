@@ -18,6 +18,14 @@ Once the stack has launched, you can test the application by navigating to:
 
 - http://localhost:8080/ to access the "Hello World!" message.
 
+## Executing the Tests
+
+Simply run:
+
+```
+$ npm run test
+```
+
 ## Building and pushing the Docker image to Container Registry
 
 1. Configure Docker to use [`gcloud`][gcloud_install_docs] as a credential helper.
