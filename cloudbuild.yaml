@@ -26,7 +26,8 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"]
 
-  # deploy the app to a GKE cluster
+  # deploy the app to a GKE cluster using the `gke-deploy` builder
+  # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gke-deploy
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
