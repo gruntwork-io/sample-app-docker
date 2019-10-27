@@ -18,7 +18,7 @@ steps:
         "--build-arg",
         "NODE_ENV=production",
         "-t",
-        "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA",
+        "${_GCR_REGION}.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA",
         ".",
       ]
 
