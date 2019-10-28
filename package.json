@@ -1,6 +1,11 @@
 {
-  "name": "docker_web_app",
+  "name": "docker_sample_app",
   "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gruntwork-io/sample-app-docker.git"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

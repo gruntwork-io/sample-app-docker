@@ -18,23 +18,26 @@ steps:
         "--build-arg",
         "NODE_ENV=production",
         "-t",
-        "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA",
+        "${_GCR_REGION}.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA",
         ".",
       ]
 
   # push the artifact to a GCR repository
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"]
+    args: ["push", "${_GCR_REGION}.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"]
 
-  # deploy the app to a GKE cluster using the `gke-deploy` builder
+  # deploy the app to a GKE cluster using the `gke-deploy` builder and expose it
+  # using a load balancer on port 80.
   # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gke-deploy
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --image=gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA
+      - --image=${_GCR_REGION}.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA
       - --location=${_GKE_CLUSTER_LOCATION}
       - --cluster=${_GKE_CLUSTER_NAME}
+      - --expose=80
 
 substitutions:
+  _GCR_REGION: eu # must be substituted
   _GKE_CLUSTER_LOCATION: europe-west3 # must be substituted
   _GKE_CLUSTER_NAME: private-cluster # must be substituted
