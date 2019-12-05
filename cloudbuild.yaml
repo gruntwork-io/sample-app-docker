@@ -35,7 +35,7 @@ steps:
       - --image=${_GCR_REGION}.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA
       - --location=${_GKE_CLUSTER_LOCATION}
       - --cluster=${_GKE_CLUSTER_NAME}
-      - --project=${_GKE_PROJECT}
+      - --project=${_GKE_CLUSTER_PROJECT}
       - --expose=80
 
 substitutions:
