@@ -69,7 +69,7 @@ jobs:
     # Push the Docker image to Google Artifact Registry
     - name: Publish
       run: |
-        docker tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest"
+        docker tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:latest"
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}"
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:latest"
     # Set up kustomize
