@@ -13,7 +13,6 @@ on:
     push:
         branches:
             - master
-            - fix-jerome
 
 env:
     PROJECT_ID: ${{ secrets.GKE_PROJECT }}
