@@ -69,6 +69,10 @@ jobs:
       run: |-
         docker build -t "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" .
     # Push the Docker image to Google Artifact Registry
+    
+    - run: |-
+        sudo gcloud auth login
+        
     - name: Publish
       run: |
         docker tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:latest"
