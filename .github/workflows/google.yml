@@ -67,17 +67,16 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |-
-        docker build -t "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" .
-    # Push the Docker image to Google Artifact Registry
-    
-    - run: |-
-        sudo gcloud auth login
-        
+        docker build \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
+
+    # Push the Docker image to Google Container Registry
     - name: Publish
-      run: |
-        docker tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:latest"
-        docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}"
-        docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:latest"
+      run: |-
+        docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
