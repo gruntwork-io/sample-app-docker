@@ -6,7 +6,7 @@ then remove this sample app once things are working.
 
 This Docker container contains a simple _"Hello World!"_ [Node.js][node_js] app.
 
-## Running the app in local development
+## Running the app in local development1
 
 The provided Docker Compose file allows you to run the app locally in development. To start the container, run:
 
